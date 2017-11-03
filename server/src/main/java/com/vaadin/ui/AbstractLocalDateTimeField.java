@@ -17,7 +17,7 @@ package com.vaadin.ui;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
@@ -130,8 +130,7 @@ public abstract class AbstractLocalDateTimeField
         if (date == null) {
             return null;
         }
-        return Instant.ofEpochMilli(date.getTime()).atZone(ZoneOffset.UTC)
-                .toLocalDateTime();
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 
     @Override
@@ -139,7 +138,7 @@ public abstract class AbstractLocalDateTimeField
         if (date == null) {
             return null;
         }
-        return Date.from(date.toInstant(ZoneOffset.UTC));
+        return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     private LocalDateTime getDate(LocalDateTime date,

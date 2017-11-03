@@ -38,6 +38,12 @@ public class DateFieldTestCase {
     }
 
     @Test
+    public void rangeStartSetGet() {
+        dateField.setRangeStart(date);
+        Assert.assertEquals(date, dateField.getRangeStart());
+    }
+
+    @Test
     public void belowRangeStartIsNotAcceptedAsValue() {
         dateField.setRangeStart(date);
         dateField.setValue(date.minusDays(1));
